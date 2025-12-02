@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Uni Tübingen – Ausweis Seriennummer Leser</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet" />
+  <link href="./style.css" rel="stylesheet" />
+</head>
+<body>
+
+  <div id="uid-copy">
+      <span id="uid"></span>
+      <button id="uid-copy-btn">
+          <i class="lni lni-clipboard"></i>
+      </button>
+  </div>
+
+  <div id="message">
+    Ausweis an Rückseite des Gerätes halten
+  </div>
+
+  <div class="hint">
+    Dieses Tool liest die <strong>Seriennummer</strong> von Studierendenausweisen der Universität Tübingen aus.<br>
+    Diese Seriennummer benötigt man beispielsweise für die <a href="https://www.my-stuwe.de/mensa/bezahlung/autoload/">Autoload-Funktion</a> des Studierendenwerks.
+  </div>
+
+  <button id="start">Scan starten</button>
+
+  <div class="compatibility">
+    <i>Funktioniert nur unter<br/><i class="lni lni-chrome"></i> Google Chrome auf<br/><i class="lni lni-android-old"></i> Android-Smartphones.</i>
+  </div>
+
+  <div class="powered-by">
+    <div class="powered-by-text">powered by</div>
+    <img class="powered-by-logo" src="./fsilogo.png" alt="FSI-Tue-Logo">
+  </div>
+
+  <script>
+    async function startScan() {
+      if (!('NDEFReader' in window)) {
+        document.getElementById('message').innerText = 'Web NFC nicht verfügbar - Smartphone nutzen';
+        document.getElementById('message').style.visibility = "visible";
+        return;
+      }
+
+      try {
+        const ndef = new NDEFReader();
+        await ndef.scan();
+
+        ndef.addEventListener('readingerror', () => {
+          document.getElementById('uid-copy').style.visibility = "hidden";
+          document.getElementById('message').style.visibility = "visible";
+          document.getElementById('message').innerText = 'Fehler beim Lesen - erneut versuchen.';
+        });
+
+        ndef.addEventListener('reading', (event) => {
+          const sn = parseInt("0x" + event.serialNumber.split(":").reverse().join("")) || '-';
+          document.getElementById('uid').innerText = sn;
+          document.getElementById('uid-copy').style.visibility = "visible";
+          document.getElementById('message').style.visibility = "hidden";
+        });
+
+        /* ui changes */
+        document.getElementById('start').style.display = 'none';
+        document.getElementById('message').style.visibility = "visible";
+
+      } catch (error) {
+        document.getElementById('message').innerText = 'Scan fehlgeschlagen: ' + error;
+          document.getElementById('uid-copy').style.visibility = "hidden";
+          document.getElementById('message').style.visibility = "visible";
+      }
+    }
+
+    async function copyUid() {
+      navigator.clipboard.writeText(document.getElementById('uid').innerText);
+    }
+
+    document.getElementById('start').addEventListener('click', startScan);
+    document.getElementById('uid-copy-btn').addEventListener('click', copyUid);
+  </script>
+</body>
+</html>

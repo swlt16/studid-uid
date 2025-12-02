@@ -1,0 +1,94 @@
+body { 
+    font-family: sans-serif; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    margin: 0; 
+    text-align: center;
+}
+.hint { 
+    max-width: 600px; 
+    width: 90%;
+    font-size: 0.9rem; 
+    color: #555; 
+    margin-bottom: 2rem;
+}
+.compatibility {
+    max-width: 600px; 
+    width: 90%;
+    font-size: 0.9rem; 
+    color: #555; 
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+button { 
+    padding: 1em 2em; 
+    font-size: 1.2rem; 
+    border-radius: 8px; 
+    border: none; 
+    background: #0077cc; 
+    color: white;
+    cursor: pointer;
+}
+.powered-by {
+    width: 100%;
+    display: block;
+}
+.powered-by-logo {
+    max-width: 50%;
+    width: 250px;
+}
+
+
+
+#uid-copy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0077cc;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    width: fit-content;
+    gap: 10px;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+    /* default value */
+    visibility: hidden;
+}
+
+#uid {
+    font-size: 14px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+#uid-copy-btn {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#uid-copy-btn:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+#uid-copy-btn i {
+    font-size: 16px;
+}
+
+#message {
+    margin-bottom: 15px;
+    border: 3px solid red;
+    background-color: rgba(255, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 6px 10px;
+    /* default */
+    visibility: hidden;
+}
