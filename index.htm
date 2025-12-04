@@ -55,7 +55,7 @@
         });
 
         ndef.addEventListener('reading', (event) => {
-          const sn = parseInt("0x" + event.serialNumber.split(":").reverse().join("")) || '-';
+          const sn = BigInt("0x" + event.serialNumber.split(":").reverse().join("")).toString() || '-';
           document.getElementById('uid').innerText = sn;
           document.getElementById('uid-copy').style.visibility = "visible";
           document.getElementById('message').style.visibility = "hidden";
