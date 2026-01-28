@@ -38,9 +38,9 @@
 
   <script>
     async function startScan() {
-      if (!('NDEFReader' in window)) {
-        document.getElementById('message').innerText = 'Web NFC nicht verfügbar - Smartphone nutzen';
-        document.getElementById('message').style.visibility = "visible";
+      if (!("NDEFReader" in window)) {
+        document.getElementById("message").innerText = "Web NFC nicht verfügbar - Smartphone nutzen";
+        document.getElementById("message").style.visibility = "visible";
         return;
       }
 
@@ -48,36 +48,36 @@
         const ndef = new NDEFReader();
         await ndef.scan();
 
-        ndef.addEventListener('readingerror', () => {
-          document.getElementById('uid-copy').style.visibility = "hidden";
-          document.getElementById('message').style.visibility = "visible";
-          document.getElementById('message').innerText = 'Fehler beim Lesen - erneut versuchen.';
+        ndef.addEventListener("readingerror", () => {
+          document.getElementById("uid-copy").style.visibility = "hidden";
+          document.getElementById("message").style.visibility = "visible";
+          document.getElementById("message").innerText = "Fehler beim Lesen - erneut versuchen.";
         });
 
-        ndef.addEventListener('reading', (event) => {
-          const sn = BigInt("0x" + event.serialNumber.split(":").reverse().join("")).toString() || '-';
-          document.getElementById('uid').innerText = sn;
-          document.getElementById('uid-copy').style.visibility = "visible";
-          document.getElementById('message').style.visibility = "hidden";
+        ndef.addEventListener("reading", (event) => {
+          const sn = BigInt("0x" + event.serialNumber.split(":").reverse().join("")).toString() || "-";
+          document.getElementById("uid").innerText = sn;
+          document.getElementById("uid-copy").style.visibility = "visible";
+          document.getElementById("message").style.visibility = "hidden";
         });
 
         /* ui changes */
-        document.getElementById('start').style.display = 'none';
-        document.getElementById('message').style.visibility = "visible";
+        document.getElementById("start").style.display = "none";
+        document.getElementById("message").style.visibility = "visible";
 
       } catch (error) {
-        document.getElementById('message').innerText = 'Scan fehlgeschlagen: ' + error;
-          document.getElementById('uid-copy').style.visibility = "hidden";
-          document.getElementById('message').style.visibility = "visible";
+        document.getElementById("message").innerText = "Scan fehlgeschlagen: " + error;
+          document.getElementById("uid-copy").style.visibility = "hidden";
+          document.getElementById("message").style.visibility = "visible";
       }
     }
 
     async function copyUid() {
-      navigator.clipboard.writeText(document.getElementById('uid').innerText);
+      navigator.clipboard.writeText(document.getElementById("uid").innerText);
     }
 
-    document.getElementById('start').addEventListener('click', startScan);
-    document.getElementById('uid-copy-btn').addEventListener('click', copyUid);
+    document.getElementById("start").addEventListener("click", startScan);
+    document.getElementById("uid-copy-btn").addEventListener("click", copyUid);
   </script>
 </body>
 </html>
