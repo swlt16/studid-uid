@@ -110,3 +110,9 @@ button {
     /* default */
     visibility: hidden;
 }
+
+.privacy-modal::backdrop {
+  background: rgba(0, 0, 0, 0.4);      /* abdunkeln */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}

@@ -36,6 +36,18 @@
     <img class="powered-by-logo" src="./assets/fsilogo.png" alt="FSI-Tue-Logo">
   </div>
 
+  <dialog class="privacy-modal">
+    <h3>Datenschutzhinweis</h3>
+    <p>
+      Das hier ist ein Platzhalter für einen beliebigen Datenschutzhinweis.
+      Es werden keine personenbezogenen Daten außerhalb von diesem Gerät gespeichert 
+      oder verarbeitet. 
+    </p>
+    <form method="dialog">
+      <button>Akzeptieren</button>
+    </form>
+  </dialog>
+
   <script>
     async function startScan() {
       if (!("NDEFReader" in window)) {
@@ -78,6 +90,8 @@
 
     document.getElementById("start").addEventListener("click", startScan);
     document.getElementById("uid-copy-btn").addEventListener("click", copyUid);
+    document.querySelector('.privacy-modal').showModal();
+
   </script>
 </body>
 </html>
